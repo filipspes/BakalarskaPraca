@@ -48,9 +48,9 @@ private:
     cv::Mat img3;
     bool firstImageLoaded = false;
     bool secondImageLoaded = false;
-    QString commonPath = "/home/"; //
+    QString commonPath = "/home/";
 
-    QString pathToFingerprints = "/home/filip/Downloads/FVC_Fingerprint_DB/FVC2004/DB3_A";
+    QString pathToFolderContainingFingerprints = "/home/filip/Downloads/FVC_Fingerprint_DB/FVC2004/DB3_A";
 
 
 
