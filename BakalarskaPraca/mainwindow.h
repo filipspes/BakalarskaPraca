@@ -48,6 +48,7 @@ private:
     cv::Mat img3;
     bool firstImageLoaded = false;
     bool secondImageLoaded = false;
+    QString commonPath = "/home/"; //
 
     QString pathToFingerprints = "/home/filip/Downloads/FVC_Fingerprint_DB/FVC2004/DB3_A";
 
@@ -73,5 +74,6 @@ private slots:
     void on_ScanFinger2_button_clicked();
     void on_ConstructTestDataset_clicked();
     void on_ExtractDataFromFingerprintsDB_Button_clicked();
+    void on_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

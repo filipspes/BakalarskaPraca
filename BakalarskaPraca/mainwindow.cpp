@@ -101,43 +101,6 @@ void MainWindow::on_ConstructTestDataset_clicked()
 }
 
 
-void MainWindow::on_Compare_Button_clicked()
-{
-    /*Py_Initialize();
-
-
-    FILE *fp = fopen ("/home/filip/anaconda3/NeuralNetwork/Classifier.py", "r+");
-
-
-    PyRun_SimpleFile(fp, "Test.py");
-    Py_Finalize();
-    QFile fileResultsOfNeuralNetwork("/home/filip/BP/Application/results.txt");
-    QList<QString> loadedData;
-    long result1;
-    long result2;
-    bool ok;
-
-
-    QString line;
-    if (fileResultsOfNeuralNetwork.open(QIODevice::ReadOnly | QIODevice::Text)){
-        QTextStream stream(&fileResultsOfNeuralNetwork);
-        while (!stream.atEnd()){
-            line = stream.readLine();
-            loadedData.append(line);
-        }
-    }
-    result1 = loadedData[0].toLong(&ok);
-    result2 = loadedData[1].toLong(&ok);
-    if(result1 == result2){
-        qDebug() << "Result of NeuralNetwork: Match found";
-    }
-    else {
-        qDebug() << "Result of NeuralNetwork: Match not found";
-    }*/
-}
-
-
-
 
 /* Preprocessing results slot*/
 void MainWindow::preprocessingResultsSlot(PREPROCESSING_RESULTS v)
@@ -169,7 +132,7 @@ void MainWindow::extractionResultsSlot(EXTRACTION_RESULTS results)
 void MainWindow::on_LoadfirstImg_Button_clicked()
 {
 
-    QString path = QFileDialog::getOpenFileName(this, "Select first fingerprint", "/home/filip/BP/DB2_B");
+    QString path = QFileDialog::getOpenFileName(this, "Select first fingerprint", commonPath);
     ui->label->clear();
     img = cv::imread(path.toStdString().c_str());
     img2 = img;
@@ -189,7 +152,7 @@ void MainWindow::on_LoadfirstImg_Button_clicked()
 
 void MainWindow::on_LoadSecondImg_Button_clicked()
 {
-    QString path = QFileDialog::getOpenFileName(this, "Select second fingerprint", "/home/filip/BP/DB2_B");
+    QString path = QFileDialog::getOpenFileName(this, "Select second fingerprint", commonPath);
     ui->label_2->clear();
     img = cv::imread(path.toStdString().c_str());
     img3 = img;
@@ -206,9 +169,6 @@ void MainWindow::on_LoadSecondImg_Button_clicked()
     secondImageLoaded = true;
 
 }
-
-
-
 
 void MainWindow::drawTree(QMap<int,int> commonPoints)
 {
@@ -249,7 +209,6 @@ QMap<int,int> MainWindow::sortCommonPoints(QMap<int,int> commonPoints){
 
 void MainWindow::Result(int numberOfConfirmed){
     int maxNumberOfMinutiae = 0;
-    double percentage;
 
     if(listOfExtractionResults[0].minutiaePredictedFixed.size() < listOfExtractionResults[1].minutiaePredictedFixed.size()){
         maxNumberOfMinutiae = listOfExtractionResults[0].minutiaePredictedFixed.size();
@@ -258,8 +217,6 @@ void MainWindow::Result(int numberOfConfirmed){
         maxNumberOfMinutiae = listOfExtractionResults[0].minutiaePredictedFixed.size();
     }
     if(numberOfConfirmed > maxNumberOfMinutiae/2){
-      percentage = (maxNumberOfMinutiae/100)*numberOfConfirmed;
-      QString::number(percentage);
       ui->label_3->setText("Match Found!");
     }
     else{
@@ -320,7 +277,6 @@ void MainWindow::on_ExtractMinutiaeFromBoth_button_clicked()
 void MainWindow::on_ScanFinger1_button_clicked()
 {
     QMessageBox msgBox;
-    img = scanner.scanFinger();
     img = scanner.scanFinger();
     if(img.empty()){
         msgBox.setWindowTitle("Failure");
