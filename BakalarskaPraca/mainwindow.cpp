@@ -73,7 +73,7 @@ void MainWindow::on_ExtractDataFromFingerprintsDB_Button_clicked()
             this->labels.push_back(i);
             nr = QString::number(i);
             nr1 = QString::number(j);
-            img = cv::imread(QString(pathToFingerprints+"/"+nr+"_"+nr1+".tif").arg(i,j).toStdString());
+            img = cv::imread(QString(pathToFolderContainingFingerprints+"/"+nr+"_"+nr1+".tif").arg(i,j).toStdString());
             preprocessing.loadInput(img);
             preprocessing.start();
             extraction.loadInput(preprocessingResult);
